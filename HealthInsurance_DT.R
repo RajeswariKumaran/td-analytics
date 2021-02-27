@@ -30,11 +30,12 @@ plot(indata$region, indata$charge.range) # directly correlated so can ignore one
 # With all parameters
 dtmod1=rpart(charge.range ~ age+sex+bmi+children+smoker+region, data=indata, method='class',cp=0.001)
 
+
 prp(dtmod1)
 
 summary(dtmod1)
 
-
+#get the rules
 party_obj <- as.party.rpart(dtmod1, data = TRUE)
 decisions <- partykit:::.list.rules.party(party_obj)
 cat(paste(decisions, collapse = "\n"))
